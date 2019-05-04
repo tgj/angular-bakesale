@@ -1,7 +1,7 @@
 import {
-  Component,
+  Component, EventEmitter,
   Input,
-  OnInit
+  OnInit, Output
 } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 
