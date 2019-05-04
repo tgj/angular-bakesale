@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Feature } from './shared/feature.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'bakesale';
+  Feature = Feature;
+  feature = Feature.Recipe;
+
+  onNavigate(feature: Feature) {
+    this.feature = feature;
+  }
 }
