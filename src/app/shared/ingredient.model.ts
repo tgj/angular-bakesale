@@ -1,3 +1,8 @@
+import {UUID} from 'angular2-uuid';
+
 export class Ingredient {
-  constructor(public name: string = undefined, public amount = undefined) {}
+  public id: string;
+  constructor(public name: string, public amount) {
+    this.id = UUID.UUID();
+  }
 }
