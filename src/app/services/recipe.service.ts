@@ -1,5 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Recipe} from '../recipes/recipe.model';
+import {Ingredient} from '../shared/ingredient.model';
+import {ShoppingListService} from './shopping-list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +10,28 @@ export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
   private recipes: Recipe[] = [
     new Recipe(
-      'A Test Recipe',
-      'This is simply a test',
-      'https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201802/tdy_pop_klg_steak_180215_1920x1080.today-inline-vid-featured-desktop.jpg'
+      'Burger Town Classic Burger',
+      'Similar to Burger King\'s Whopper.',
+      'https://bk-ca-prd.s3.amazonaws.com/sites/burgerking.ca/files/03299-85%20DIG_Silo_Whopper_500x540_CR_1.png',
+      [
+        new Ingredient('Buns', 2),
+        new Ingredient('Hamburger Patty', 1),
+        new Ingredient('Lettuce', 1),
+        new Ingredient('Cheese', 1),
+      ]
     ),    new Recipe(
-      'A Test Recipe 2',
-      'This is simply another test',
-      'https://media4.s-nbcnews.com/j/MSNBC/Components/Video/201802/tdy_pop_klg_steak_180215_1920x1080.today-inline-vid-featured-desktop.jpg'
+      'Classic Chicken Sandwich',
+      'Similar to Chick-fil-A\'s Chicken Sandwich.',
+      'https://www.cfacdn.com/img/order/COM/Menu_Refresh/Entree/Entree%20Desktop/_0003s_0004_NEW_Stack620_PDP_Chick-Fil-A-Sandwich_1085.png',
+      [
+        new Ingredient('Chicken', 1),
+        new Ingredient('Buns', 2),
+        new Ingredient('Pickles', 2),
+      ]
     )
   ];
 
-  constructor() {}
+  constructor(private shoppingListService: ShoppingListService) {}
 
   list() {
     return this.recipes.slice();
@@ -41,6 +54,10 @@ export class RecipeService {
     const recipeToDelete = this.get(id);
     this.recipes = this.recipes.filter(recipe => recipe.id !== id);
     return recipeToDelete;
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.shoppingListService.addIngredients(ingredients);
   }
 
 }
