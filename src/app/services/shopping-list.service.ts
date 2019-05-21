@@ -24,19 +24,15 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
-  add(ingredient: Ingredient) {
-    this.ingredients = [
-      ...this.ingredients,
-      ingredient
-    ];
-    this.ingredientsChanged.emit(this.ingredients.slice());
-  }
-
   addIngredients(ingredients: Ingredient[]) {
     this.ingredients = [
       ...this.ingredients,
       ...ingredients
     ];
     this.ingredientsChanged.emit(this.ingredients.slice());
+  }
+
+  add(ingredient: Ingredient) {
+    this.addIngredients([ingredient]);
   }
 }
